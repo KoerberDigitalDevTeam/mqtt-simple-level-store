@@ -1,0 +1,19 @@
+{
+  "watermarks": {
+    "lines": [ 100, 100 ],
+    "functions": [ 100, 100 ],
+    "branches": [ 100, 100 ],
+    "statements": [ 100, 100 ]
+  },
+  "check-coverage": true,
+  "per-file": true,
+  "lines": 100,
+  "functions": 100,
+  "branches": 100,
+  "statements": 100,
+  "report-dir": "./coverage",
+  "produce-source-map": true,
+  "preserve-comments": false,
+  "cache": false,
+  "exclude": [ "values/values_generated.js", "test/**/*" ]
+}

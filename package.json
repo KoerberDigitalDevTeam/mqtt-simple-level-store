@@ -1,0 +1,36 @@
+{
+  "name": "@koerber/mqtt-simple-level-store",
+  "version": "1.0.0",
+  "description": "A simple level-backed store for MQTT.js",
+  "main": "index.js",
+  "keywords": [
+    "mqtt",
+    "level",
+    "store"
+  ],
+  "scripts": {
+    "test": "mocha 'test/**/*.test.js' || false",
+    "lint": "eslint --cache '.eslintrc.js' '**/*js'",
+    "lintfix": "eslint --cache '.eslintrc.js' '**/*js' --fix",
+    "coverage": "nyc --reporter=html --reporter=text npm run test",
+    "build": "npm run lint && npm run coverage"
+  },
+  "author": "Pier Fumagalli <pier.fumagalli@koerber.digital>",
+  "license": "MIT",
+  "dependencies": {
+    "level": "^5.0.1",
+    "msgpack5": "^4.2.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "del": "^4.1.1",
+    "eslint": "^5.16.0",
+    "eslint-config-google": "^0.13.0",
+    "mktemp": "^1.0.0",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1"
+  },
+  "peerDependencies": {
+    "mqtt": "^3.0.0"
+  }
+}
