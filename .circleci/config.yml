@@ -1,0 +1,69 @@
+version: 2
+build_image: &build_image
+  docker:
+    - image: circleci/node:10
+
+attach_workspace: &attach_workspace
+  attach_workspace:
+    at: .
+
+restore_cache: &restore_cache
+  restore_cache:
+    keys:
+      - mqtt-simple-level-store-{{ checksum "package.json" }}
+      - mqtt-simple-level-store-
+
+jobs:
+  install:
+    <<: *build_image
+    steps:
+      - checkout
+      - <<: *restore_cache
+      - run: echo $NPM_AUTH >> .npmrc
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: mqtt-simple-level-store-{{ checksum "package-lock.json" }}
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .npmrc
+            - node_modules
+
+  test:
+    <<: *build_image
+    steps:
+      - checkout
+      - <<: *attach_workspace
+      - run: npm run test
+
+  publish:
+    <<: *build_image
+    steps:
+      - checkout
+      - <<: *attach_workspace
+      - run: npm publish
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - install:
+          filters:
+            tags:
+              only: /^v.*/
+      - test:
+          requires:
+            - install
+          filters:
+            tags:
+              only: /^v.*/
+      - publish:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              only: master
