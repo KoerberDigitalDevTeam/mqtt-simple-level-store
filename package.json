@@ -1,5 +1,5 @@
 {
-  "name": "@koerber/mqtt-simple-level-store",
+  "name": "@koerber-internal/mqtt-simple-level-store",
   "version": "1.0.1",
   "description": "A simple level-backed store for MQTT.js",
   "main": "index.js",
